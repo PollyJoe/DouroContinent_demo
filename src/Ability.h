@@ -8,6 +8,8 @@
 #ifndef Ability_h
 #define Ability_h
 
+#pragma once
+
 #include <string>
 
 enum class Attribute{attack, defense, control, support, heal};
@@ -19,12 +21,14 @@ enum class Attribute{attack, defense, control, support, heal};
  ********************************************************************************************/
 class Ability{
 public:
+    Ability() = default;
     Ability(unsigned int b, std::string n): basic_value(b), name(n){}
     ~Ability() = default;
     
     virtual void set_game_value(unsigned int property) = 0;
     virtual void effect(unsigned int &object) = 0;
     virtual void display_ability() = 0;
+    virtual Attribute get_attribute() = 0;
 
 protected:
     unsigned int game_value;
@@ -40,6 +44,7 @@ protected:
 // Attack
 class AttackAbility : public Ability{
 public:
+    AttackAbility() = default;
     AttackAbility(unsigned int b, std::string n): Ability(b, n){}
     ~AttackAbility() = default;
     
@@ -53,7 +58,10 @@ public:
         printf("Ability: %s\n", name.c_str());
         printf("Attribute: Attack\n");
         printf("Damage: %d\n", game_value);
+        printf("Basic ability: %d\n", basic_value);
     }
+    
+    Attribute get_attribute() override{ return attribute; }
 
 private:
     Attribute attribute = Attribute::attack;
@@ -62,6 +70,7 @@ private:
 //Support
 class SupportAbility : public Ability{
 public:
+    SupportAbility() = default;
     SupportAbility(unsigned int b, std::string n): Ability(b, n){}
     ~SupportAbility() = default;
     
@@ -75,7 +84,10 @@ public:
         printf("Ability: %s\n", name.c_str());
         printf("Attribute: Support\n");
         printf("Support effect: %d%%\n", game_value);
+        printf("Basic ability: %d\n", basic_value);
     }
+    
+    Attribute get_attribute() override{ return attribute; }
 
 private:
     Attribute attribute = Attribute::support;
@@ -84,6 +96,7 @@ private:
 //Heal
 class HealAbility : public Ability{
 public:
+    HealAbility() = default;
     HealAbility(unsigned int b, std:: string n): Ability(b,n){}
     ~HealAbility() = default;
     
@@ -101,7 +114,10 @@ public:
         printf("Ability: %s\n", name.c_str());
         printf("Attribute: Heal\n");
         printf("Heal: %d\n", game_value);
+        printf("Basic ability: %d\n", basic_value);
     }
+    
+    Attribute get_attribute() override{ return attribute; }
 
 private:
     Attribute attribute = Attribute::heal;

@@ -6,11 +6,12 @@
 //
 
 #include <stdio.h>
-#include "Ability.h"
+#include "Ring.h"
 
 
 
 int main(){
+    // Test for Ability module
     unsigned int hp = 10000;
     const unsigned int max_hp = 10000;
     unsigned int speed = 100;
@@ -32,6 +33,10 @@ int main(){
     begonia.display_ability();
     begonia.effect(hp, max_hp);
     printf("Healed hp = %d\n\n", hp);
+    
+    //Test for Ring module
+    AttackRing ring(Age::thousand, 3, 200, "Fire");
+    ring.display_info();
     
     return 0;
 }
