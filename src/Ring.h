@@ -19,6 +19,8 @@ public:
     Ring(Age a, unsigned int l, unsigned int b, std::string n, Attribute att): age(a), level_growth(l), ability(b, n, att){}
     ~Ring() = default;
     
+    Ability ability;
+    
     void display_info(){
         display_age();
         ability.display_ability();
@@ -33,7 +35,6 @@ public:
 private:
     Age age;
     unsigned int level_growth;
-    Ability ability;
 };
 
 
