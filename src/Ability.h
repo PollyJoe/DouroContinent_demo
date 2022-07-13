@@ -4,15 +4,15 @@
 //
 //  Created by Polly Zhou on 2022/7/11.
 //
+#pragma once
 
 #ifndef Ability_h
 #define Ability_h
 
-#pragma once
-
 #include <string>
 
 enum class Attribute{attack, defense, control, support, heal};
+void display_attribute(Attribute a);
 
 /********************************************************************************************
  * Ability:
@@ -22,104 +22,19 @@ enum class Attribute{attack, defense, control, support, heal};
 class Ability{
 public:
     Ability() = default;
-    Ability(unsigned int b, std::string n): basic_value(b), name(n){}
+    Ability(unsigned int b, std::string n, Attribute a): basic_value(b), name(n), attribute(a){}
     ~Ability() = default;
     
-    virtual void set_game_value(unsigned int property) = 0;
-    virtual void effect(unsigned int &object) = 0;
-    virtual void display_ability() = 0;
-    virtual Attribute get_attribute() = 0;
+    void set_game_value(unsigned int property);
+    void effect(unsigned int &object, unsigned const int max_object);
+    void display_ability();
+    Attribute get_attribute(){ return attribute; };
 
 protected:
-    unsigned int game_value;
+    unsigned int game_value = 0;
     unsigned int basic_value;
     std::string name;
+    Attribute attribute;
 };
 
-/****************************************************************************
- * Abilities with different properties:
- *      Attack, Defense, Control, Support, Heal
- ****************************************************************************/
-
-// Attack
-class AttackAbility : public Ability{
-public:
-    AttackAbility() = default;
-    AttackAbility(unsigned int b, std::string n): Ability(b, n){}
-    ~AttackAbility() = default;
-    
-    void set_game_value(unsigned int property) override{
-        game_value = basic_value * (1 + property / 100);
-    }
-    void effect(unsigned int &object) override{
-        object -= game_value;
-    }
-    void display_ability() override{
-        printf("Ability: %s\n", name.c_str());
-        printf("Attribute: Attack\n");
-        printf("Damage: %d\n", game_value);
-        printf("Basic ability: %d\n", basic_value);
-    }
-    
-    Attribute get_attribute() override{ return attribute; }
-
-private:
-    Attribute attribute = Attribute::attack;
-};
-
-//Support
-class SupportAbility : public Ability{
-public:
-    SupportAbility() = default;
-    SupportAbility(unsigned int b, std::string n): Ability(b, n){}
-    ~SupportAbility() = default;
-    
-    void set_game_value(unsigned int property) override{
-        game_value = basic_value * (1 + property / 100);
-    }
-    void effect(unsigned int &object) override{
-        object *= (1 + game_value / 100);
-    }
-    void display_ability() override{
-        printf("Ability: %s\n", name.c_str());
-        printf("Attribute: Support\n");
-        printf("Support effect: %d%%\n", game_value);
-        printf("Basic ability: %d\n", basic_value);
-    }
-    
-    Attribute get_attribute() override{ return attribute; }
-
-private:
-    Attribute attribute = Attribute::support;
-};
-
-//Heal
-class HealAbility : public Ability{
-public:
-    HealAbility() = default;
-    HealAbility(unsigned int b, std:: string n): Ability(b,n){}
-    ~HealAbility() = default;
-    
-    void set_game_value(unsigned int property) override{
-        game_value = basic_value * (1 + property / 100);
-    }
-    void effect(unsigned int &object) override{
-        object += game_value;
-    }
-    void effect(unsigned int &object, const unsigned int max_value){
-        effect(object);
-        if(object > max_value) object = max_value;
-    }
-    void display_ability() override{
-        printf("Ability: %s\n", name.c_str());
-        printf("Attribute: Heal\n");
-        printf("Heal: %d\n", game_value);
-        printf("Basic ability: %d\n", basic_value);
-    }
-    
-    Attribute get_attribute() override{ return attribute; }
-
-private:
-    Attribute attribute = Attribute::heal;
-};
 #endif /* Ability_h */

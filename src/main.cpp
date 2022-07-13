@@ -5,38 +5,22 @@
 //  Created by Polly Zhou on 2022/7/10.
 //
 
-#include <stdio.h>
-#include "Ring.h"
-
-
+#include <iostream>
+#include "Soul.h"
+void absorb(Soul &absorber, Ring ring){
+    absorber.rings.push_back(ring);
+}
 
 int main(){
-    // Test for Ability module
-    unsigned int hp = 10000;
-    const unsigned int max_hp = 10000;
-    unsigned int speed = 100;
+    Ring fire(Age::thousand, 2, 150, "Fire", Attribute::attack);
+    Ring slash(Age::ten_thousand, 4, 300, "Slash", Attribute::attack);
     
-    AttackAbility slash(100, "Slash");
-    slash.set_game_value(200);
-    slash.display_ability();
-    slash.effect(hp);
-    printf("Attacked hp = %d\n\n", hp);
-    
-    SupportAbility cheer(200, "Cheer");
-    cheer.set_game_value(100);
-    cheer.display_ability();
-    cheer.effect(speed);
-    printf("Buffed speed = %d\n\n", speed);
-    
-    HealAbility begonia(50, "Begonia");
-    begonia.set_game_value(100);
-    begonia.display_ability();
-    begonia.effect(hp, max_hp);
-    printf("Healed hp = %d\n\n", hp);
-    
-    //Test for Ring module
-    AttackRing ring(Age::thousand, 3, 200, "Fire");
-    ring.display_info();
+    Soul Venus(10, 1000, 80, 60, 100, Attribute::attack, "Venus");
+    Venus.display_soul_info();
+    absorb(Venus, fire);
+    Venus.display_soul_info();
+    absorb(Venus, slash);
+    Venus.display_soul_info();
     
     return 0;
 }
