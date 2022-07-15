@@ -14,12 +14,14 @@
 enum class Age{ten, hundred, thousand, ten_thousand, million, god};
 void display_Age(Age a);
 
+
 class Ring{
 public:
     Ring(Age a, unsigned int l, unsigned int b, std::string n, Attribute att): age(a), level_growth(l), ability(b, n, att){}
     ~Ring() = default;
     
     Ability ability;
+    bool absorbable = true;
     
     void display_info(){
         display_age();
