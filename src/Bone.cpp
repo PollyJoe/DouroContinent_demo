@@ -9,7 +9,7 @@
 #include "Bone.h"
 
 void Bone::display_info(){
-    printf("Bone type: ");
+    printf("* Bone type: ");
     switch(type){
         case BoneType::head:{printf("Head\n");break;}
         case BoneType::trunk:{printf("Trunk\n");break;}
@@ -20,5 +20,5 @@ void Bone::display_info(){
         case BoneType::externed:{printf("Externed\n");break;}
         default:break;
     }
-    ability.display_ability();
+    ability->display_ability();
 }

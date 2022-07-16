@@ -9,11 +9,13 @@
 #ifndef Soul_h
 #define Soul_h
 
-#include "Ring.h"
-#include "Bone.h"
+#include "Beast.h"
 #include <vector>
 #include <any>
 #include <cmath>
+
+using Rings = std::vector<Ring*>;
+using Bones = std::vector<Bone*>;
 
 class Soul{
 public:
@@ -28,11 +30,16 @@ public:
 
     
     // Abilities, including the ones from rings, the ones from bones, and those self-made
-    std::vector<Ring*> rings;
-    std::vector<Bone*> bones;
-    std::vector<Ability> self_made;
+    Rings rings;
+    Bones bones;
+    std::vector<Ability*> self_made;
     
-    // Display basic info
+    //Check the vectors
+    bool check_rings();
+    bool check_bones();
+    bool check_self_made();
+    
+    // Display info
     void display_soul_info();
     void display_basic_info();
     void display_properties();
@@ -60,6 +67,11 @@ public:
     bool ifabsorb(Bone *bone);
     void absorb(Bone *bone);
     
+    //Choose ability
+    Ability* use_ability();
+    int choose_ability(int vector_size);
+    char choose_ability_source();
+    
 private:
     unsigned int level;  //Level of soul force
     unsigned int exp = 0;
@@ -71,6 +83,7 @@ private:
     Attribute attribute;
     std::string name;
 };
+
 
 
 

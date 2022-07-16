@@ -15,12 +15,14 @@ enum class BoneType{ head, trunk, left_leg, right_leg, left_arm, right_arm, exte
 class Bone{
 public:
     Bone() = default;
-    Bone(BoneType t, unsigned int b1, unsigned int b2, std::string n, Attribute a): type(t), buff(b1), ability(b2, n ,a){ }
+    Bone(BoneType t, unsigned int b1, unsigned int b2, std::string n, Attribute a): type(t), buff(b1){
+        ability = new Ability(b2, n ,a);
+    }
     ~Bone() = default;
     
     void display_info();
     
-    Ability ability;
+    Ability *ability;
     bool absorbable = true;
     BoneType type;
     unsigned int buff;

@@ -11,7 +11,7 @@
 
 #include <string>
 
-enum class Attribute{attack, defense, control, support, heal};
+enum class Attribute{attack, defense, control, support, heal, none};
 void display_attribute(Attribute a);
 
 /********************************************************************************************
