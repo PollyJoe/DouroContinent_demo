@@ -17,7 +17,7 @@ enum class Attribute{ singleattack, singleheal, singlecontrol, singlesupport, go
  * 1. Original value: the output when the ability does not belong to any soul
  * 2. Real value: it will be initialized as 0 when it is not absorbed by any soul
  * 3. Attribute
- ******************************************************************************************/
+ ********************************************************************************************/
 class Ability{
 public:
     Ability() = default;
