@@ -13,7 +13,7 @@
 
 /****************************************************************
  * Derived class  1 from ability:
- * Attack ability:
+ * Single-attack ability: only one object for each hit
  *  attack lives: cut down their hp or kill them(when hp = 0)
  ***************************************************************/
 class SingleAttackAbility : public Ability{
@@ -26,6 +26,11 @@ public:
 
 };
 
+/****************************************************************
+ * Derived class  2 from ability:
+ * Single-heal ability: only one object for each heal
+ *  Heal lives: recover their hp or kill them(when hp = 0)
+ ***************************************************************/
 class SingleHealAbility : public Ability{
 public:
     SingleHealAbility(unsigned int ori): Ability(ori, Attribute::singleheal){ }
@@ -35,6 +40,11 @@ public:
     void heal(Life *life, int percentage);
 };
 
+/****************************************************************
+ * Derived class  3 from ability:
+ * Single-support ability:
+ *  Give buffs to only one object each time: buff one property, it can be decided by the user
+ ***************************************************************/
 class SingleSupportAbility : public Ability{
 public:
     SingleSupportAbility(unsigned int ori): Ability(ori, Attribute::singlesupport){ }
@@ -47,6 +57,11 @@ public:
 
 };
 
+/****************************************************************
+ * Derived class  4 from ability:
+ * Single-control abitlity:
+ *  Debuff one object's properties for each time, it can be decided by the user
+ ***************************************************************/
 class SingleControlAbility : public Ability{
 public:
     SingleControlAbility(unsigned int ori): Ability(ori, Attribute::singlecontrol){ }

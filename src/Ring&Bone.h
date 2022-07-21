@@ -19,8 +19,9 @@ enum class Age{ ten, hundred, thousand, ten_thousand, million, god };
 class Ring{
 public:
     Ring(Age a, unsigned int lg, Attribute att): age(a), level_growth(lg), attribute(att){ };
+    
 public:
-    void get_attribute(){};
+    Attribute get_attribute(){ return attribute; };
     virtual void display_ring_info() = 0;
     
 // Basic data of a normal ring
@@ -32,9 +33,25 @@ protected:
 
 /************************************************************************************************
  * Base class: Bone
+ *  Attribute: It is set according to the ability it contains (if it contains)
+ *  Ability: The abiltiy that the bone carries (not in the base class)
+ *  Buff: similar to level growth, improve the properties, the object will e set depends on the attribute of the bone:
+ *      1. Single attack: damage
+ *      2. Single support: buff;
+ *      3. Single heal: heal;
+ *      4. Single control: spirit;
  *************************************************************************************************/
 class Bone{
-    
+public:
+    Bone(unsigned int bu, Attribute att): buff(bu), attribute(att){ }
+
+public:
+    Attribute get_attribute(){ return attribute; }
+    virtual void display_info() = 0;
+
+protected:
+    unsigned int buff;
+    Attribute attribute;
 };
 
 #endif /* Ring_Bone_h */
